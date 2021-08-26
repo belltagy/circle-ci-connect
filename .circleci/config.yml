@@ -72,7 +72,7 @@ jobs:
 workflows:
   my_workflow:
     jobs:
-      - build
+      - create_infrastructure
 
       # - create_infrastructure
       # - configure_infrastructure:
