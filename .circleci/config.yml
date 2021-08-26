@@ -36,9 +36,9 @@ jobs:
         - run: apk add --update curl
         - run:
             name: smoke test.
-            command: 
+            command: |
               URL="http://52.90.177.57:3000/"
-              if curl -s --head ${URL} # test if blog.udacity. com exists
+              if curl -s --head ${URL} # test if blog.udacity. com exists;
               then
                return 0
               else
