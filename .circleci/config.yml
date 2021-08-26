@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Configure server
           command: |
-            ansible-playbook -i -vvv inventory main-remote.yml
+            ansible-playbook -vvv -i  inventory main-remote.yml
    
    smoke_test:
       docker:
