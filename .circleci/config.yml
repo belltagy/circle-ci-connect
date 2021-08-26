@@ -28,18 +28,28 @@ jobs:
           name: Configure server
           command: |
             ansible-playbook -i inventory main-remote.yml
+   
    smoke_test:
-     docker:
-       - image: ubuntu
-     steps:
-       - run:
-          name: Smoke_test_by_curl
-          command: |
-            if curl -s --head "https://52.90.177.57:3000/" ; then   exit 0; else  exit 1; fi
+      docker:
+        - image: alpine:latest
+      steps:
+        - run: apk add --update curl
+        - run:
+            name: smoke test.
+            command: 
+              URL="http://52.90.177.57:3000/"
+              if curl -s --head ${URL} # test if blog.udacity. com exists
+              then
+               return 0
+              else
+               return 1
+              fi
             
 workflows:
   my_workflow:
     jobs:
       #- create_infrastructure
-      - configure_infrastructure
-      - smoke_test
+      #- configure_infrastructure
+      - smoke_test:
+          requires:
+            - configure_infrastructure
